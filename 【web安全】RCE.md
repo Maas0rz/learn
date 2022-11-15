@@ -38,8 +38,8 @@
 ##### <<PHP
 
 ###### eval()
-
-​		把字符串按照 PHP 代码来执行。
+	   
+&emsp;&emsp;把字符串按照 PHP 代码来执行。
 
 ```php
 eval(phpinfo()); //可以
@@ -58,7 +58,7 @@ eval("phpinfo()"); //报错
 
 ###### assert()
 
-​		如果是字符串将会被当作 PHP 代码执行。
+&emsp;&emsp;如果是字符串将会被当作 PHP 代码执行。
 
 ```php
 assert(phpinfo()); //可以
@@ -112,7 +112,7 @@ call_user_func(函数a, xxx)
 
 ###### system()、passthru()
 
-​		执行操作系统命令，仅当执行成功时输出执行结果。
+&emsp;&emsp;执行操作系统命令，仅当执行成功时输出执行结果。
 
 ```php
 system/passthru("命令"); //标准写法
@@ -135,7 +135,7 @@ system/passthru(命令); //可以，但会抛出错误
 
 ###### exec()
 
-​		执行操作系统命令，但不会输出任何内容。
+&emsp;&emsp;执行操作系统命令，但不会输出任何内容。
 
 ```php
 exec("命令");
@@ -143,7 +143,7 @@ exec("命令");
 
 ###### shell_exec()
 
-​		执行操作系统命令，返回执行结果，但不会输出，使用 `echo shell_exec("命令");` 即可输出执行结果。
+&emsp;&emsp;执行操作系统命令，返回执行结果，但不会输出，使用 `echo shell_exec("命令");` 即可输出执行结果。
 
 #### 【绕过】
 
@@ -162,25 +162,23 @@ exec("命令");
 
 ##### <<过滤空格
 
-​		可用 $IFS 替代空格。
-
-​		但注意，对于 `echo 12$IFS34 ` ，输出 "12" 而不是 "12 34"，因为系统会认为 \$ 后面的都是变量名，而前面又没定义，所以不会输出任何东西，怎么办呢？
+&emsp;&emsp;可用 $IFS 替代空格。
+&emsp;&emsp;但注意，对于 `echo 12$IFS34 ` ，输出 "12" 而不是 "12 34"，因为系统会认为 \$ 后面的都是变量名，而前面又没定义，所以不会输出任何东西，怎么办呢？
 
 ###### 引号绕过
-
-​		`echo 12$IFS""34` ，引号会截断变量名。
+&emsp;&emsp;`echo 12$IFS""34` ，引号会截断变量名。
 
 ###### 局部变量法
 
-​		`a=34;echo 12$IFS$a`
+&emsp;&emsp;`a=34;echo 12$IFS$a`
 
 ###### 大括号绕过
 
-​		`echo 12${IFS}34` ，限定变量范围。
+&emsp;&emsp;`echo 12${IFS}34` ，限定变量范围。
 
 ###### 添加内置变量
 
-​		`echo 12$IFS$134`，$1~9、\$@、\$* 都是内置变量，可截断变量名。
+&emsp;&emsp;`echo 12$IFS$134`，$1~9、\$@、\$* 都是内置变量，可截断变量名。
 
 ###### <>、<绕过
 
@@ -234,7 +232,7 @@ cat f{l,s}ag.txt
 
 ###### 内置变量绕过
 
-​		内置变量如上述，`cat flag.txt` 可添加为如 `c\$1a\$2t\$IFS$*flag.txt`。
+&emsp;&emsp;内置变量如上述，`cat flag.txt` 可添加为如 `c\$1a\$2t\$IFS$*flag.txt`。
 
 ###### 反斜杠绕过
 
@@ -258,11 +256,11 @@ cat f{l,s}ag.txt
 
 ###### 使用绝对路径加载命令
 
-​		`/bin/cat flag.txt`
+&emsp;&emsp;`/bin/cat flag.txt`
 
 ###### 字符串反序绕过
 
-​		反序为 "txt.galf tac" ，配合 rev 命令使其正序。
+&emsp;&emsp;反序为 "txt.galf tac" ，配合 rev 命令使其正序。
 
 ```bash
 txt.galf tac|rev|bash
@@ -274,9 +272,9 @@ txt.galf tac|rev|bash
 
 ###### ``、$()绕过
 
-​		如果 ls 的结果为 flag.txt，则可 cat \`ls`或 cat $(ls) ，还可 ls|xargs cat 。
+&emsp;&emsp;如果 ls 的结果为 flag.txt，则可 cat \`ls`或 cat $(ls) ，还可 ls|xargs cat 。
 
-​		xargs：进行标准输出格式转换。如上述命令，通过管道符获取 ls 命令的标准输出再通过 xargs 命令对标准输出格式化为 cat 命令的参数。
+&emsp;&emsp;xargs：进行标准输出格式转换。如上述命令，通过管道符获取 ls 命令的标准输出再通过 xargs 命令对标准输出格式化为 cat 命令的参数。
 
 ###### 命令代替绕过
 
